@@ -4,129 +4,120 @@
   <meta charset='utf-8' />
   <title>Remembering Catastrophe: Holocaust Sites Today</title>
   <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.2/mapbox.js' type='text/javascript'></script>
+  <script src='js/site.js' type='text/javascript'></script>
   <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.2/mapbox.css' rel='stylesheet' type='text/css' />
-  
-  <style type='text/css'>
-    body {
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      overflow: hidden;
-    }
-    p {
-      line-height: 20px;
-    }
-    a {
-      color: #29A1E1;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    #map {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      height: 100%;
-    }
-    #header {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      background: #f8f8f8;
-      color: #282828;
-      border-bottom:1px solid #000;
-      height: 60px;
-      z-index: 5;
-    }
-    #nav {
-      position: absolute;
-      left: 10px;
-      top: 150px;
-      width: 175px;
-      z-index: 5;
-    }
-    #nav ul {
-      list-style: none;
-      font-size: 14px;
-      margin: 0;
-      padding: 0;
-    }
-    #nav ul li a {
-      display: block;
-      background: #f2f2f2;
-      padding: 6px 20px;
-      color: #282828;
-      margin-bottom: 2px;
-    }
-    .source {
-      font-size: 80%;
-    }
-    .wax-tooltip {
-      right: 10px;
-      left: auto;
-    }
-  </style>
+  <link href='css/style.css' rel='stylesheet' type='text/css' />
 </head>
 
 <body>
   <div id='header'>
-    <h2>Remembering Catastrophe: Holocaust Sites Today</h2>
+    <div class='limiter'>
+      <h2>Remembering Catastrophe: Holocaust Sites Today</h2>
+    </div>
   </div>
   <div id='map'></div>
   <div id='nav'>
     <ul>
-      <li><a href='#' id='austria'>Austria</a></li>
-      <li><a href='#' id='belarus'>Belarus</a></li>
-      <li><a href='#' id='cz'>Czech Republic</a></li>
-      <li><a href='#' id='france'>France</a></li>
-      <li><a href='#' id='germany'>Germany</a></li>
-      <li><a href='#' id='latvia'>Latvia</a></li>
-      <li><a href='#' id='lithuania'>Lithuania</a></li>
-      <li><a href='#' id='netherlands'>The Netherlands</a></li>
-      <li><a href='#' id='poland'>Poland</a></li>
-      <li><a href='#' id='ukraine'>Ukraine</a></li>
-      <li><a href='#' id='uk'>United Kingdom</a></li>
+      <li>
+        <a href='#' id='austria'>Austria</a>
+        <ul class='subnav'>
+          <li><a href='#' id='gusen'>Gusen</a></li>
+          <li><a href='#' id='mauthausen'>Mauthausen</a></li>
+          <li><a href='#' id='schloss-hartheim'>Schloss Hartheim</a></li>
+          <li><a href='#' id='vienna'>Vienna</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href='#' id='belarus'>Belarus</a>
+        <ul class='subnav'>
+          <li><a href='#' id='belarus-sites'>Belarus sites</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href='#' id='cz'>Czech Republic</a>
+        <ul class='subnav'>
+          <li><a href='#' id='lidice'>Lidice</a></li>
+          <li><a href='#' id='terezin'>Terezin (Theresianstadt)</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href='#' id='france'>France</a>
+        <ul class='subnav'>
+          <li><a href='#' id='natzweiler-strutthof'>Natzweiler-Strutthof</a></li>
+          <li><a href='#' id='paris'>Paris</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href='#' id='germany'>Germany</a>
+        <ul class='subnav'>
+          <li><a href='#' id='bergen-belsen'>Bergen-Belsen</a></li>
+          <li><a href='#' id='berlin'>Berlin</a></li>
+          <li><a href='#' id='buchenwald'>Buchenwald</a></li>
+          <li><a href='#' id='dachau'>Dachau</a></li>
+          <li><a href='#' id='sinti-roma'>Documentation and Cultural Centre of German Sinti and Roma, Heidelberg</a></li>
+          <li><a href='#' id='flossenburg'>Flossenbürg</a></li>
+          <li><a href='#' id='munich'>Munich</a></li>
+          <li><a href='#' id='ravensbruck'>Ravensbrück</a></li>
+          <li><a href='#' id='sachsenhausen'>Sachsenhausen</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href='#' id='latvia'>Latvia</a>
+        <ul class='subnav'>
+          <li><a href='#' id='bikernieki'>Biķernieki</a></li>
+          <li><a href='#' id='riga'>Riga</a></li>
+          <li><a href='#' id='rumbula'>Rumbula</a></li>
+          <li><a href='#' id='salaspils'>Salaspils</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href='#' id='lithuania'>Lithuania</a>
+        <ul class='subnav'>
+          <li><a href='#' id='ninth-fort'>Ninth Fort</a></li>
+          <li><a href='#' id='ponary'>Ponary (Paneriai)</a></li>
+          <li><a href='#' id='vilnius'>Vilnius (Vilna)</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href='#' id='netherlands'>The Netherlands</a>
+        <ul class='subnav'>
+          <li><a href='#' id='amsterdam'>Amsterdam</a></li>
+          <li><a href='#' id='westerbork'>Westerbork</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href='#' id='poland'>Poland</a>
+        <ul class='subnav'>
+          <li><a href='#' id='auschwitz-birkenau'>Auschwitz-Birkenau</a></li>
+          <li><a href='#' id='belzec'>Bełżec</a></li>
+          <li><a href='#' id='chelmno'>Chełmno (Kulmhof)</a></li>
+          <li><a href='#' id='izbica'>Izbica</a></li>
+          <li><a href='#' id='jozefow'>Józefów</a></li>
+          <li><a href='#' id='kazimierz-dolny'>Kazimierz Dolny</a></li>
+          <li><a href='#' id='lodz'>Łódź</a></li>
+          <li><a href='#' id='lublin'>Lublin</a></li>
+          <li><a href='#' id='majdanek'>Majdanek</a></li>
+          <li><a href='#' id='plaszow'>Płaszów</a></li>
+          <li><a href='#' id='sobibor'>Sobibor</a></li>
+          <li><a href='#' id='tarnow'>Tarnów</a></li>
+          <li><a href='#' id='treblinka'>Treblinka</a></li>
+          <li><a href='#' id='warsaw'>Warsaw</a></li>
+          <li><a href='#' id='zamosc'>Zamość</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href='#' id='ukraine'>Ukraine</a>
+        <ul class='subnav'>
+          <li><a href='#' id='babiyar'>Babi Yar</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href='#' id='uk'>United Kingdom</a>
+        <ul class='subnav'>
+          <li><a href='#' id='london'>London</a></li>
+        </ul>
+      </li>
     </ul>
   </div>
-  <script type='text/javascript'>
-    mapbox.auto('map','matt.map-7pq00fdn', function(map) {
-    
-	    document.getElementById('austria').onclick = function() {
-	      map.centerzoom({ lat: 47.58, lon: 14.2 }, 7, true);
-	    };
-	    document.getElementById('belarus').onclick = function() {
-	      map.centerzoom({ lat: 53.7, lon: 27.9 }, 6, true);
-	    };
-	    document.getElementById('cz').onclick = function() {
-	      map.centerzoom({ lat: 49.8, lon: 15.5 }, 7, true);
-	    };
-	    document.getElementById('france').onclick = function() {
-	      map.centerzoom({ lat: 46.6, lon: 2.5 }, 6, true);
-	    };
-	    document.getElementById('germany').onclick = function() {
-	      map.centerzoom({ lat: 51.1, lon: 10.5 }, 6, true);
-	    };
-	    document.getElementById('latvia').onclick = function() {
-	      map.centerzoom({ lat: 57, lon: 24.6 }, 7, true);
-	    };
-	    document.getElementById('lithuania').onclick = function() {
-	      map.centerzoom({ lat: 55.4, lon: 24 }, 7, true);
-	    };
-	    document.getElementById('netherlands').onclick = function() {
-	      map.centerzoom({ lat: 52.3, lon: 5.5 }, 7, true);
-	    };
-	    document.getElementById('poland').onclick = function() {
-	      map.centerzoom({ lat: 52.3, lon: 19.6 }, 6, true);
-	    };
-	    document.getElementById('ukraine').onclick = function() {
-	      map.centerzoom({ lat: 49.2, lon: 31.5 }, 6, true);
-	    };
-	    document.getElementById('uk').onclick = function() {
-	      map.centerzoom({ lat: 51.5, lon: 0 }, 7, true);
-	    };
-	    
-	});
-  </script>
 </body>
 </html>

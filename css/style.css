@@ -1,0 +1,87 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  background: #1E1E1E;
+}
+p {
+  line-height: 20px;
+}
+h2 {
+  font-size: 20px;
+}
+a {
+  color: #29A1E1;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.limiter {
+  position: relative;
+  margin: 0 auto;
+  width: 960px;
+}
+#map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+}
+#header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: #f8f8f8;
+  color: #282828;
+  border-bottom:1px solid #000;
+  height: 60px;
+  z-index: 5;
+}
+#nav {
+  position: absolute;
+  left: 10px;
+  top: 150px;
+  width: 175px;
+  z-index: 5;
+}
+#nav ul {
+  list-style: none;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+#nav ul li a {
+  display: block;
+  background: #2a2521;
+  padding: 6px 20px;
+  color: #ddd;
+  margin-bottom: 2px;
+}
+#nav ul li a:hover {
+  background: #3a3531;
+}
+.source {
+  font-size: 80%;
+}
+.wax-tooltip {
+  right: 10px;
+  left: auto;
+}
+#nav .subnav {
+  position: absolute;
+  margin-left: 175px;
+  top: 0;
+}
+#nav .subnav li a {
+  display: block;
+  background: #3a3531;
+  padding: 2px 15px;
+  font-size: 13px;
+  margin-bottom: 1px;
+  width: 100px;
+}
+#nav .subnav li a:hover {
+  background: #4a4541;
+}
