@@ -12,7 +12,7 @@ layout: default
       <ul class='subnav'>
         {% for x in site.posts reversed %}
         {% if x.category == country %}
-        <li><a href='{{country}}/{{x.title | replace:" ","-" }}' id='{{x.place}}'>{{x.place}}</a></li>
+        <li><a href='{{country}}/{{x.title | downcase | replace:" ","-" }}' id='{{x.place}}'>{{x.place}}</a></li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -69,7 +69,7 @@ markerLayer.add_feature({
 {% for points in site.posts %}
 {% if points.coords %}
 $('.simplestyle-marker[alt="{{points.place}}"]')
-    .attr('href','{{points.category}}/{{points.title | replace:" ","-" }}');
+    .attr('href','{{points.category}}/{{points.title | downcase | replace:" ","-" }}');
 {% endif %}
 {% endfor %}
 
