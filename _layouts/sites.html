@@ -20,12 +20,12 @@ layout: default
         <div class='pix3'></div>
         <!--{% for i in (1..page.photos) %}
         <script>
-        $.ajax('{{base}}img/{{page.category}}/{{page.title}}/{{page.title}}{{i}}.jpg')
+        $.ajax('{{base}}/img/{{page.category}}/{{page.title}}/{{page.title}}{{i}}.jpg')
           .success(function (res) {
             console.log(res);
         });
         </script>
-        <img class='thumb' src='{{base}}img/{{page.category}}/{{page.title}}/{{page.title | downcase}}{{i}}.jpg' />
+        <img class='thumb' src='{{base}}/img/{{page.category}}/{{page.title}}/{{page.title | downcase}}{{i}}.jpg' />
         <script>
         console.log('{{ i | mod:3 }}');
         </script>
@@ -43,9 +43,9 @@ photoArray.push('{{pic}}');
 {% endfor %}
 
 function placephoto(pic, id) {
-  var a = '<a href="{{base}}img/{{page.category}}/{{page.title}}/';
+  var a = '<a href="{{base}}/img/{{page.category}}/{{page.title}}/';
   var b = '" class="highslide" onclick="return hs.expand(this)"><img id="img';
-  var c = '" class="thumb" src="{{base}}img/{{page.category}}/{{page.title}}/';
+  var c = '" class="thumb" src="{{base}}/img/{{page.category}}/{{page.title}}/';
   var abc = a + pic + b + id + c + pic + '" /></a>';
   if ($('.pix1').height() <= $('.pix2').height() && $('.pix1').height() <= $('.pix3').height()) {
     $('.pix1').append(abc);
