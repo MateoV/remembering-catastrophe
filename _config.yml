@@ -1,6 +1,6 @@
 auto: true
 server: true
-baseurl: /
+baseurl: /remembering-catastrophe
 permalink: /:categories/:title
 exclude: [newpics, data]
 prose:
