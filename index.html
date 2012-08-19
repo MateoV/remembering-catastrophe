@@ -1,123 +1,80 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8' />
-  <title>Remembering Catastrophe: Holocaust Sites Today</title>
-  <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.2/mapbox.js' type='text/javascript'></script>
-  <script src='js/site.js' type='text/javascript'></script>
-  <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.2/mapbox.css' rel='stylesheet' type='text/css' />
-  <link href='css/style.css' rel='stylesheet' type='text/css' />
-</head>
+---
+title: Holocaust Sites Today
+layout: default
+---
 
-<body>
-  <div id='header'>
-    <div class='limiter'>
-      <h2>Remembering Catastrophe: Holocaust Sites Today</h2>
-    </div>
-  </div>
-  <div id='map'></div>
-  <div id='nav'>
-    <ul>
-      <li>
-        <a href='#' id='austria'>Austria</a>
-        <ul class='subnav'>
-          <li><a href='#' id='gusen'>Gusen</a></li>
-          <li><a href='#' id='mauthausen'>Mauthausen</a></li>
-          <li><a href='#' id='schloss-hartheim'>Schloss Hartheim</a></li>
-          <li><a href='#' id='vienna'>Vienna</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href='#' id='belarus'>Belarus</a>
-        <ul class='subnav'>
-          <li><a href='#' id='belarus-sites'>Belarus sites</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href='#' id='cz'>Czech Republic</a>
-        <ul class='subnav'>
-          <li><a href='#' id='lidice'>Lidice</a></li>
-          <li><a href='#' id='terezin'>Terezin (Theresianstadt)</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href='#' id='france'>France</a>
-        <ul class='subnav'>
-          <li><a href='#' id='natzweiler-strutthof'>Natzweiler-Strutthof</a></li>
-          <li><a href='#' id='paris'>Paris</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href='#' id='germany'>Germany</a>
-        <ul class='subnav'>
-          <li><a href='#' id='bergen-belsen'>Bergen-Belsen</a></li>
-          <li><a href='#' id='berlin'>Berlin</a></li>
-          <li><a href='#' id='buchenwald'>Buchenwald</a></li>
-          <li><a href='#' id='dachau'>Dachau</a></li>
-          <li><a href='#' id='sinti-roma'>Documentation and Cultural Centre of German Sinti and Roma, Heidelberg</a></li>
-          <li><a href='#' id='flossenburg'>Flossenbürg</a></li>
-          <li><a href='#' id='munich'>Munich</a></li>
-          <li><a href='#' id='ravensbruck'>Ravensbrück</a></li>
-          <li><a href='#' id='sachsenhausen'>Sachsenhausen</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href='#' id='latvia'>Latvia</a>
-        <ul class='subnav'>
-          <li><a href='#' id='bikernieki'>Biķernieki</a></li>
-          <li><a href='#' id='riga'>Riga</a></li>
-          <li><a href='#' id='rumbula'>Rumbula</a></li>
-          <li><a href='#' id='salaspils'>Salaspils</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href='#' id='lithuania'>Lithuania</a>
-        <ul class='subnav'>
-          <li><a href='#' id='ninth-fort'>Ninth Fort</a></li>
-          <li><a href='#' id='ponary'>Ponary (Paneriai)</a></li>
-          <li><a href='#' id='vilnius'>Vilnius (Vilna)</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href='#' id='netherlands'>The Netherlands</a>
-        <ul class='subnav'>
-          <li><a href='#' id='amsterdam'>Amsterdam</a></li>
-          <li><a href='#' id='westerbork'>Westerbork</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href='#' id='poland'>Poland</a>
-        <ul class='subnav'>
-          <li><a href='#' id='auschwitz-birkenau'>Auschwitz-Birkenau</a></li>
-          <li><a href='#' id='belzec'>Bełżec</a></li>
-          <li><a href='#' id='chelmno'>Chełmno (Kulmhof)</a></li>
-          <li><a href='#' id='izbica'>Izbica</a></li>
-          <li><a href='#' id='jozefow'>Józefów</a></li>
-          <li><a href='#' id='kazimierz-dolny'>Kazimierz Dolny</a></li>
-          <li><a href='#' id='lodz'>Łódź</a></li>
-          <li><a href='#' id='lublin'>Lublin</a></li>
-          <li><a href='#' id='majdanek'>Majdanek</a></li>
-          <li><a href='#' id='plaszow'>Płaszów</a></li>
-          <li><a href='#' id='sobibor'>Sobibor</a></li>
-          <li><a href='#' id='tarnow'>Tarnów</a></li>
-          <li><a href='#' id='treblinka'>Treblinka</a></li>
-          <li><a href='#' id='warsaw'>Warsaw</a></li>
-          <li><a href='#' id='zamosc'>Zamość</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href='#' id='ukraine'>Ukraine</a>
-        <ul class='subnav'>
-          <li><a href='#' id='babiyar'>Babi Yar</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href='#' id='uk'>United Kingdom</a>
-        <ul class='subnav'>
-          <li><a href='#' id='london'>London</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-</body>
-</html>
+<div id='map'></div>
+<div id='nav'>
+  <ul>
+    {% for country in site.countries %}
+    <li>
+      <a href='#' id='{{country}}'>{{country}}</a>
+      <ul class='subnav'>
+        {% for x in site.posts reversed %}
+        {% if x.category == country %}
+        <li><a href='{{country}}/{{x.title | replace:" ","-" }}' id='{{x.place}}'>{{x.place}}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script type="text/javascript">
+$('#nav ul li a, ul.subnav li a').hover(
+    function () {
+        if ($(this).parent().parent().hasClass('subnav')) {
+            $(this).parent().parent().css('display','block').css('margin-top',-18 - $(this).parent().parent().height()/2);
+        } else {
+            $(this).next().css('display','block').css('margin-top',-18 - $(this).next().height()/2);
+        }
+    },
+    function () {
+        $('ul.subnav').css('display','none');
+    }
+);
+
+/*
+mapbox.auto('map','matt.map-7pq00fdn', function(map) {
+    map.setZoomRange(4,8);
+});
+*/
+
+var m = mapbox.map('map');
+m.addLayer(mapbox.layer().id('matt.map-7pq00fdn'));
+m.zoom(5).center({ lat: 51.323, lon: 7.421 }).setZoomRange(4,8);
+
+var markerLayer = mapbox.markers.layer();
+
+mapbox.markers.interaction(markerLayer);
+m.addLayer(markerLayer);
+
+{% for points in site.posts %}
+{% if points.coords %}
+markerLayer.add_feature({
+    geometry: {
+        coordinates: {{points.coords}}
+    },
+    properties: {
+        'marker-color': '#ff0000',
+        'marker-symbol': 'star-stroked',
+        title: '{{points.place}}',
+        description: '{{points.category}}'
+    }
+});
+{% endif %}
+{% endfor %}
+
+{% for points in site.posts %}
+{% if points.coords %}
+$('.simplestyle-marker[alt="{{points.place}}"]')
+    .attr('href','{{points.category}}/{{points.title | replace:" ","-" }}');
+{% endif %}
+{% endfor %}
+
+$('.simplestyle-marker').click(function() {
+    window.location = $(this).attr('href');
+});
+
+</script>

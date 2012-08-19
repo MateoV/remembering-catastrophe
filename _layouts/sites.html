@@ -1,0 +1,107 @@
+---
+layout: default
+---
+{% assign base = site.baseurl %}
+<div id='sitepage'>
+  <div class='limiter'>
+    <div class='content clearfix'>
+      <div class='overview clearfix'>
+        <div class='col summary'>
+          <h3 class='sitename'>{{page.place}}</h3>
+          <h4 class='coname'>{{page.category}}</h4>
+          {{content}}
+        </div>
+        <div id='smallmap'>
+        </div>
+      </div>
+      <div id='gallery'>
+        <div class='pix1'></div>
+        <div class='pix2'></div>
+        <div class='pix3'></div>
+        <!--{% for i in (1..page.photos) %}
+        <script>
+        $.ajax('{{base}}img/{{page.category}}/{{page.title}}/{{page.title}}{{i}}.jpg')
+          .success(function (res) {
+            console.log(res);
+        });
+        </script>
+        <img class='thumb' src='{{base}}img/{{page.category}}/{{page.title}}/{{page.title | downcase}}{{i}}.jpg' />
+        <script>
+        console.log('{{ i | mod:3 }}');
+        </script>
+        {% endfor %}-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var photoArray = [];
+var imgid;
+{% for pic in page.photos %}
+photoArray.push('{{pic}}');
+{% endfor %}
+
+function placephoto(pic, id) {
+  var a = '<a href="{{base}}img/{{page.category}}/{{page.title}}/';
+  var b = '" class="highslide" onclick="return hs.expand(this)"><img id="img';
+  var c = '" class="thumb" src="{{base}}img/{{page.category}}/{{page.title}}/';
+  var abc = a + pic + b + id + c + pic + '" /></a>';
+  if ($('.pix1').height() <= $('.pix2').height() && $('.pix1').height() <= $('.pix3').height()) {
+    $('.pix1').append(abc);
+  } else if ($('.pix2').height() <= $('.pix1').height() && $('.pix2').height() <= $('.pix3').height()) {
+    $('.pix2').append(abc);
+  } else {
+    $('.pix3').append(abc);
+  }
+}
+
+function wait(imgid) {
+  if (!document.getElementById(imgid).complete) {
+    setTimeout('wait(imgid)', 100);
+  } else {
+    foo();
+  }
+}
+
+var i = 0;
+function foo() {
+  placephoto(photoArray[i], i);
+  if (i < photoArray.length - 1) {
+    imgid = 'img' + i;
+    i += 1;
+    wait(imgid);
+  }
+}
+
+foo();
+/*
+{% for pic in page.photos %}
+{% unless forloop.first %}
+ if (document.getElementById('img{{forloop.index | minus:1}}').complete) {
+{% endunless %}
+    placephoto('{{pic}}', '{{forloop.index}}');
+{% endfor %}
+{% for pic in page.photos %}
+{% unless forloop.first %} } {% endunless %}
+{% endfor %}
+*/
+var coords = {{page.coords}};
+var sm = mapbox.map('smallmap');
+sm.addLayer(mapbox.layer().id('matt.map-7pq00fdn'));
+sm.zoom(6).center({ lat: coords[1], lon: coords[0] }).setZoomRange(3,17);
+
+var siteMarker = mapbox.markers.layer();
+
+sm.addLayer(siteMarker);
+
+siteMarker.add_feature({
+    geometry: {
+        coordinates: {{page.coords}}
+    },
+    properties: {
+        'marker-color': '#ff0000',
+        'marker-symbol': 'star-stroked'
+    }
+});
+</script>

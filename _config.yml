@@ -1,0 +1,19 @@
+auto: true
+server: true
+baseurl: /
+permalink: /:categories/:title
+exclude: [newpics, data]
+prose:
+  rooturl: "_posts"
+countries:
+  - Austria
+  - Belarus
+  - Czech Republic
+  - France
+  - Germany
+  - Latvia
+  - Lithuania
+  - Poland
+  - The Netherlands
+  - Ukraine
+  - United Kingdom

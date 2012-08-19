@@ -1,5 +1,6 @@
-mapbox.auto('map','matt.map-7pq00fdn', function(map) {
-
+//mapbox.auto('map','matt.map-7pq00fdn', function(map) {
+//    map.setZoomRange(4,8);
+/*
     document.getElementById('austria').onclick = function() {
         map.centerzoom({ lat: 47.58, lon: 14.2 }, 7, true);
     };
@@ -33,5 +34,5 @@ mapbox.auto('map','matt.map-7pq00fdn', function(map) {
     document.getElementById('uk').onclick = function() {
         map.centerzoom({ lat: 51.5, lon: 0 }, 7, true);
     };
-    
-});
+    */
+//});
