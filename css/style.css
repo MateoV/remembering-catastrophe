@@ -340,10 +340,6 @@ h2 a, h2 a:hover {
   background: -webkit-linear-gradient(top, #d9d7d5 0%, #c8c6c4 100%);
   background: linear-gradient(to bottom, #d9d7d5 0%, #c8c6c4 100%);
 }
-.wax-tooltip {
-  right: 10px;
-  left: auto;
-}
 #nav .subnav {
   display: none;
   position: absolute;
@@ -384,14 +380,14 @@ h2 a, h2 a:hover {
 }
 #sitepage .summary {
   position: relative;
-  width: 600px;
+  width: 640px;
 }
 #sitepage #smallmap {
   position: absolute;
   top: 0;
   right: 0;
-  width: 300px;
-  height: 300px;
+  width: 256px;
+  height: 256px;
   background: #fff;
   border: 1px solid #666;
 }
