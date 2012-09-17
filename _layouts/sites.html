@@ -18,19 +18,22 @@ layout: default
         <div class='pix1'></div>
         <div class='pix2'></div>
         <div class='pix3'></div>
-        <!--{% for i in (1..page.photos) %}
-        <script>
-        $.ajax('{{base}}/img/{{page.category}}/{{page.title}}/{{page.title}}{{i}}.jpg')
-          .success(function (res) {
-            console.log(res);
-        });
-        </script>
-        <img class='thumb' src='{{base}}/img/{{page.category}}/{{page.title}}/{{page.title | downcase}}{{i}}.jpg' />
-        <script>
-        console.log('{{ i | mod:3 }}');
-        </script>
-        {% endfor %}-->
       </div>
+    </div>
+    <div id='footnav'>
+      {% for country in site.countries %}
+        <div class='col'>
+          <p>{{country}}</p>
+          <ul>
+            {% for x in site.posts reversed %}
+            {% if x.category == country %}
+            <li><a href='{{base}}/{{country}}/{{x.title | downcase | replace:" ","-" }}' id='{{x.place}}'>{{x.place}}</a></li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+      
     </div>
   </div>
 </div>
@@ -60,12 +63,12 @@ function wait(imgid) {
   if (!document.getElementById(imgid).complete) {
     setTimeout('wait(imgid)', 100);
   } else {
-    foo();
+    loadphoto();
   }
 }
 
 var i = 0;
-function foo() {
+function loadphoto() {
   placephoto(photoArray[i], i);
   if (i < photoArray.length - 1) {
     imgid = 'img' + i;
@@ -74,18 +77,8 @@ function foo() {
   }
 }
 
-foo();
-/*
-{% for pic in page.photos %}
-{% unless forloop.first %}
- if (document.getElementById('img{{forloop.index | minus:1}}').complete) {
-{% endunless %}
-    placephoto('{{pic}}', '{{forloop.index}}');
-{% endfor %}
-{% for pic in page.photos %}
-{% unless forloop.first %} } {% endunless %}
-{% endfor %}
-*/
+loadphoto();
+
 var coords = {{page.coords}};
 var sm = mapbox.map('smallmap');
 sm.addLayer(mapbox.layer().id('matt.map-7pq00fdn'));

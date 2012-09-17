@@ -1,0 +1,149 @@
+---
+title: Holocaust Sites Today
+layout: default
+class: home
+---
+
+<div id='map'></div>
+
+<div id='nav'>
+  <ul>
+    {% for country in site.countries %}
+    <li>
+      <a class='gradient' href='#' id='{{country}}'><span class='icon-zoom-in'></span>{{country}}</a>
+      <ul class='subnav'>
+        {% for x in site.posts reversed %}
+        {% if x.category == country %}
+        <li><a class='gradient' href='{{country}}/{{x.title | downcase | replace:" ","-" }}' id='{{x.place}}'>{{x.place}}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<a id='about-btn' href='#about' data-toggle='modal'>About</a>
+
+<div class="modal hide fade" id="about">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2>About the Site</h2>
+        </div>
+        <div class="modal-body">
+            {{content}}
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+        </div>
+    </div>
+
+<script type="text/javascript">
+var orig;
+$('#nav ul li a, ul.subnav li a').hover(
+    function () {
+        var that = $(this).parent().parent();
+        $('#nav ul li a').removeClass('active');
+        
+        if (that.hasClass('subnav')) {
+            that.css('display','block');
+            that.prev().addClass('active');
+            orig = $('.simplestyle-marker[alt="' + this.id + '"]').attr('src');
+            $('.simplestyle-marker[alt="' + this.id + '"]')
+                .attr('src','http://a.tiles.mapbox.com/v3/marker/pin-m-star-stroked+ff0000.png');
+            $('.simplestyle-marker[alt="' + this.id + '"]').trigger('mouseover');
+        } else {
+            var fromTop = -18 - $(this).next().height()/2;
+            $(this).children('.icon-zoom-in').css('display','block');
+            $(this).next().css('display','block').css('margin-top',fromTop);
+            
+            if ($(this).next().offset().top < $('#nav').offset().top) {
+                $(this).next().css('margin-top',-18 - $(this).height()*2);
+            }
+            if (($(this).next().offset().top + $(this).next().height()) > $(window).height() + 20) {
+                $(this).next().css('margin-top',(fromTop - ($(this).next().offset().top + $(this).next().height() - $(window).height() + 20)));
+            }
+        }
+    },
+    function () {
+        $('ul.subnav').css('display','none');
+        $('.icon-zoom-in').css('display','none');
+        $('#nav ul li a').removeClass('active');
+        $('.simplestyle-marker[alt="' + this.id + '"]')
+            .attr('src',orig);
+        $('.simplestyle-marker[alt="' + this.id + '"]').trigger('mouseout');
+    }
+);
+
+var m = mapbox.map('map');
+m.addLayer(mapbox.layer().id('matt.map-7pq00fdn'));
+m.zoom(5).center({ lat: 53.5, lon: 10 }).setZoomRange(4,10);
+m.ui.zoomer.add();
+
+var markerLayer = mapbox.markers.layer();
+
+mapbox.markers.interaction(markerLayer);
+m.addLayer(markerLayer);
+
+{% for points in site.posts %}
+{% if points.coords %}
+markerLayer.add_feature({
+    geometry: {
+        coordinates: {{points.coords}}
+    },
+    properties: {
+        'marker-color': '#9a2e2e',
+        'marker-symbol': 'star-stroked',
+        title: '{{points.place}}',
+        description: '{{points.category}}'
+    }
+});
+{% endif %}
+{% endfor %}
+
+{% for points in site.posts %}
+{% if points.coords %}
+$('.simplestyle-marker[alt="{{points.place}}"]')
+    .attr('href','{{points.category}}/{{points.title | downcase | replace:" ","-" }}');
+{% endif %}
+{% endfor %}
+
+$('.simplestyle-marker').click(function() {
+    window.location = $(this).attr('href');
+});
+
+document.getElementById('Austria').onclick = function() {
+        m.centerzoom({ lat: 47.58, lon: 14.2 }, 7, true);
+    };
+document.getElementById('Belarus').onclick = function() {
+        m.centerzoom({ lat: 53.7, lon: 27.9 }, 6, true);
+    };
+    document.getElementById('Czech Republic').onclick = function() {
+        m.centerzoom({ lat: 49.8, lon: 15.5 }, 7, true);
+    };
+    document.getElementById('France').onclick = function() {
+        m.centerzoom({ lat: 46.6, lon: 2.5 }, 6, true);
+    };
+    document.getElementById('Germany').onclick = function() {
+        m.centerzoom({ lat: 51.1, lon: 10.5 }, 6, true);
+    };
+    document.getElementById('Latvia').onclick = function() {
+        m.centerzoom({ lat: 57, lon: 24.6 }, 8, true);
+    };
+    document.getElementById('Lithuania').onclick = function() {
+        m.centerzoom({ lat: 55.4, lon: 24 }, 7, true);
+    };
+    document.getElementById('The Netherlands').onclick = function() {
+        m.centerzoom({ lat: 52.3, lon: 5.5 }, 7, true);
+    };
+    document.getElementById('Poland').onclick = function() {
+        m.centerzoom({ lat: 52.3, lon: 19.6 }, 6, true);
+    };
+    document.getElementById('Ukraine').onclick = function() {
+        m.centerzoom({ lat: 49.2, lon: 31.5 }, 6, true);
+    };
+    document.getElementById('United Kingdom').onclick = function() {
+        m.centerzoom({ lat: 51.5, lon: 0 }, 7, true);
+    };
+
+</script>

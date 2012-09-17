@@ -161,13 +161,14 @@ p {
   margin-top: 10px;
   color: #ccc;
 }
-h2 {
-  font-size: 22px;
-  margin-top: 18px;
+h2,#about h3 {
+  font-family: 'EB Garamond', serif;
+  font-size: 28px;
+  margin-top: 20px;
+  font-weight: normal;
 }
 h3 {
-  margin: 0;
-  font-size: 24px;
+  font-size: 22px;
 }
 h4 {
   margin: 0;
@@ -176,13 +177,16 @@ h4 {
   color: #828282;
 }
 a {
-  color: #29A1E1;
+  color: #7d959f;
   text-decoration: none;
 }
 a:hover {
   text-decoration: none;
 }
-h2 a {
+a:focus {
+  outline: 0;
+}
+h2 a, h2 a:hover {
   color: inherit;
 }
 
@@ -197,41 +201,103 @@ h2 a {
 }
 #map {
   position: absolute;
-  top: 0;
+  top: 125px;
   right: 0;
   left: 0;
-  height: 100%;
+  bottom: 0;
+}
+.zoomer {
+  right: 20px;
+  top: 20px;
+  left: auto;
+  border-color: rgb(28,28,28);
+}
+.zoomer.zoomout {
+  right: 49px;
+}
+#about-btn {
+  position: absolute;
+  top: 185px;
+  right: 20px;
+  width: 58px;
+  height: 24px;
+  z-index: 2;
+  background: rgb(28,28,28);
+  background: rgba(28,28,28,.7);
+  border-radius: 3px;
+  color: #fff;
+  text-align: center;
+  line-height: 25px;
+}
+.modal {
+  width: 800px;
+  margin: -275px 0 0 -400px;
+}
+.modal h2 {
+  margin: 0;
+}
+.modal p:first-child {
+  margin-top: 0;
 }
 #header {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  background: url(../img/bg.jpg) no-repeat;
-  background-size: cover;
+  background: #fff;
   color: #282828;
-  border-bottom:1px solid #000;
-  height: 60px;
+  height: 125px;
   z-index: 5;
+  -moz-box-shadow: 0 0 5px #000;
+  -webkit-box-shadow: 0 0 5px #000;
+  box-shadow: 0 0 5px #000;
 }
 #header .title {
   position: absolute;
-  left: 0;
+  left: 25px;
+  width: 50%;
+  min-width: 550px;
+  z-index: 15;
+}
+#header .title p, .modal p {
+  color: #333;
 }
 #headerpic {
-  background: url(../img/headerpic.png) no-repeat;
+  background: url(../img/guardtower.jpg) no-repeat;
   position: absolute;
   right: 0;
   top: 0;
-  width: 291px;
-  height: 60px;
+  width: 606px;
+  height: 125px;
+}
+#footnav {
+  position: relative;
+  font-size: .8em;
+  margin-bottom: 20px;
+}
+#footnav .col {
+  display: block;
+  float: left;
+  width: 9.090909%;
+}
+#footnav .col p {
+  line-height: 15px;
+  margin-bottom: 5px;
+}
+#footnav li {
+  line-height: 11px;
+  margin-bottom: 3px;
 }
 #nav {
   position: absolute;
-  left: 0;
-  top: 150px;
+  left: 20px;
+  top: 145px;
   width: 175px;
   z-index: 5;
+  background: rgb(28,28,28);
+  background: rgba(28,28,28,.7);
+  padding: 5px 5px 3px 5px;
+  border-radius: 4px;
 }
 #nav ul {
   list-style: none;
@@ -241,16 +307,38 @@ h2 a {
 }
 #nav ul li a {
   display: block;
-  background: #2a2521;
-  padding: 6px 20px;
-  color: #ddd;
+  padding: 6px 30px;
+  color: #222;
   margin-bottom: 2px;
 }
-#nav ul li a:hover {
-  background: #3a3531;
+.icon-zoom-in {
+  display: none;
+  float: left;
+  margin-left: -20px;
+  margin-top: 2px;
+  opacity: .5;
+  filter: alpha(opacity=50);
 }
-.source {
-  font-size: 80%;
+#nav ul li a:hover {
+  /*background: #3a3531;*/
+}
+.gradient {
+  background: #fff;
+  background: -ms-linear-gradient(top, #ffffff 0%, #eeeeee 100%);
+  background: -moz-linear-gradient(top, #ffffff 0%, #eeeeee 100%);
+  background: -o-linear-gradient(top, #ffffff 0%, #eeeeee 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #eeeeee));
+  background: -webkit-linear-gradient(top, #ffffff 0%, #eeeeee 100%);
+  background: linear-gradient(to bottom, #ffffff 0%, #eeeeee 100%);
+}
+.gradient:hover, #nav ul li a.active {
+  background: #d9d7d5;
+  background: -ms-linear-gradient(top, #d9d7d5 0%, #c8c6c4 100%);
+  background: -moz-linear-gradient(top, #d9d7d5 0%, #c8c6c4 100%);
+  background: -o-linear-gradient(top, #d9d7d5 0%, #c8c6c4 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #d9d7d5), color-stop(1, #c8c6c4));
+  background: -webkit-linear-gradient(top, #d9d7d5 0%, #c8c6c4 100%);
+  background: linear-gradient(to bottom, #d9d7d5 0%, #c8c6c4 100%);
 }
 .wax-tooltip {
   right: 10px;
@@ -261,25 +349,24 @@ h2 a {
   position: absolute;
   margin-left: 175px;
   margin-top: -34px;
+  border-top: 1px solid #111919;
+  border-right: 1px solid #111919;
 }
 #nav .subnav li a {
   display: block;
-  background: #3a3531;
   padding: 5px 15px;
   font-size: 13px;
-  border-bottom: 1px solid #171717;
+  border-left: 5px solid #111919;
+  border-bottom: 1px solid #111919;
   width: 125px;
   margin-bottom: 0;
   line-height: 14px;
-}
-#nav .subnav li a:hover {
-  background: #4a4541;
 }
 
 /* Holocaust Site Pages */
 #sitepage {
   position: absolute;
-  top: 60px;
+  top: 125px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -292,7 +379,7 @@ h2 a {
 }
 #sitepage .overview {
   position: relative;
-  min-height: 355px;
+  min-height: 300px;
   margin-bottom: 20px;
 }
 #sitepage .summary {
@@ -301,7 +388,7 @@ h2 a {
 }
 #sitepage #smallmap {
   position: absolute;
-  top: 55px;
+  top: 0;
   right: 0;
   width: 300px;
   height: 300px;
@@ -326,9 +413,19 @@ img.thumb {
 /* Map Elements */
 .marker-popup {
   padding: 10px 12px;
+  box-shadow: 2px 2px 5px -2px #000;
+  -moz-box-shadow: 2px 2px 5px -2px #000;
+  -webkit-box-shadow: 2px 2px 5px -2px #000;
+  border: none;
+  max-width: 250px;
+  line-height: 15px;
+}
+.marker-popup:before {
+  border: none;
 }
 .marker-description {
   font-size: 11px;
   color: #aaa;
   text-transform: uppercase;
+  margin-top: 5px;
 }
