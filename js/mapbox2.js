@@ -691,7 +691,7 @@
       script.onload = script.onreadystatechange = null
       script.onclick && script.onclick()
       // Call the user callback with the last value stored and clean up values and scripts.
-      console.log(lastValue);
+      //console.log(lastValue);
       o.success && o.success(lastValue)
       lastValue = undefined
       head.removeChild(script)
