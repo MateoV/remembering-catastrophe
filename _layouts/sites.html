@@ -14,13 +14,18 @@ layout: default
         <div id='smallmap'>
         </div>
       </div>
-      <div id='gallery'>
+      <div id='gallery1' class='gallery clearfix'>
+        <div class='pix1'></div>
+        <div class='pix2'></div>
+        <div class='pix3'></div>
+      </div>
+      <div id='gallery2' class='gallery clearfix hidden'>
         <div class='pix1'></div>
         <div class='pix2'></div>
         <div class='pix3'></div>
       </div>
     </div>
-    <div id='footnav'>
+    <div id='footnav' class='clearfix'>
       {% for country in site.countries %}
         <div class='col'>
           <p>{{country}}</p>
@@ -39,23 +44,38 @@ layout: default
 </div>
 
 <script>
-var photoArray = [];
-var imgid;
-{% for pic in page.photos %}
-photoArray.push('{{pic}}');
+var photoArray1 = [],
+    photoArray2 = [],
+    imgid;
+{% for p in page.photos %}
+  {% if p.set %}
+    $('#gallery2').removeClass('hidden');
+    {% for item in p.pics %}
+      console.log({{p.set}});
+      photoArray{{p.set}}.push('{{item}}');
+    {% endfor %}
+    {% if p.header %}
+      $('#gallery{{p.set}}').prepend('<h3>{{p.header}}</h3>');
+    {% endif %}
+  {% else %}
+    photoArray1.push('{{p}}');
+  {% endif %}
 {% endfor %}
 
-function placephoto(pic, id) {
-  var a = '<a href="{{base}}/img/{{page.category}}/{{page.title}}/';
-  var b = '" class="highslide" onclick="return hs.expand(this)"><img id="img';
-  var c = '" class="thumb" src="{{base}}/img/{{page.category}}/{{page.title}}/';
-  var abc = a + pic + b + id + c + pic + '" /></a>';
-  if ($('.pix1').height() <= $('.pix2').height() && $('.pix1').height() <= $('.pix3').height()) {
-    $('.pix1').append(abc);
-  } else if ($('.pix2').height() <= $('.pix1').height() && $('.pix2').height() <= $('.pix3').height()) {
-    $('.pix2').append(abc);
+function placephoto(set, pic, id) {
+  var g = '#gallery' + set,
+      caption = pic.replace('.jpg','').replace("'","\\\'"),
+      a = '<a href="{{base}}/img/{{page.category}}/{{page.title}}/',
+      b = '" class="highslide" onclick="return hs.expand(this, { captionText: \'' + caption + '\' })"><img id="img',
+      c = '" class="thumb" src="{{base}}/img/{{page.category}}/{{page.title}}/',
+      abc = a + pic + b + id + c + pic + '" /></a>';
+      
+  if ($(g + ' .pix1').height() <= $(g + ' .pix2').height() && $(g + ' .pix1').height() <= $(g + ' .pix3').height()) {
+    $(g + ' .pix1').append(abc);
+  } else if ($(g + ' .pix2').height() <= $(g + ' .pix1').height() && $(g + ' .pix2').height() <= $(g + ' .pix3').height()) {
+    $(g + ' .pix2').append(abc);
   } else {
-    $('.pix3').append(abc);
+    $(g + ' .pix3').append(abc);
   }
 }
 
@@ -69,8 +89,12 @@ function wait(imgid) {
 
 var i = 0;
 function loadphoto() {
-  placephoto(photoArray[i], i);
-  if (i < photoArray.length - 1) {
+  if (i < photoArray1.length) {
+    placephoto(1, photoArray1[i], i);
+  } else if (photoArray2) {
+    placephoto(2, photoArray2[i - photoArray1.length], i);
+  }
+  if (i < photoArray1.length + photoArray2.length - 1) {
     imgid = 'img' + i;
     i += 1;
     wait(imgid);

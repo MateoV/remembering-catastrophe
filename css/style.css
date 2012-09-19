@@ -228,6 +228,10 @@ h2 a, h2 a:hover {
   color: #fff;
   text-align: center;
   line-height: 25px;
+  font-weight: bold;
+}
+#about-btn:hover {
+  background: #7d959f;
 }
 .modal {
   width: 800px;
@@ -273,7 +277,7 @@ h2 a, h2 a:hover {
 #footnav {
   position: relative;
   font-size: .8em;
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 #footnav .col {
   display: block;
@@ -331,6 +335,19 @@ h2 a, h2 a:hover {
   background: -webkit-linear-gradient(top, #ffffff 0%, #eeeeee 100%);
   background: linear-gradient(to bottom, #ffffff 0%, #eeeeee 100%);
 }
+/* light blue */
+.gradient:hover, #nav ul li a.active {
+  background: #d9d7d5;
+  background: -ms-linear-gradient(top, #d5dde0 0%, #cbd5d9 100%);
+  background: -moz-linear-gradient(top, #d5dde0 0%, #cbd5d9 100%);
+  background: -o-linear-gradient(top, #d5dde0 0%, #cbd5d9 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #d5dde0), color-stop(1, #cbd5d9));
+  background: -webkit-linear-gradient(top, #d5dde0 0%, #cbd5d9 100%);
+  background: linear-gradient(to bottom, #d5dde0 0%, #cbd5d9 100%);
+}
+
+/* light brown */
+/*
 .gradient:hover, #nav ul li a.active {
   background: #d9d7d5;
   background: -ms-linear-gradient(top, #d9d7d5 0%, #c8c6c4 100%);
@@ -340,6 +357,8 @@ h2 a, h2 a:hover {
   background: -webkit-linear-gradient(top, #d9d7d5 0%, #c8c6c4 100%);
   background: linear-gradient(to bottom, #d9d7d5 0%, #c8c6c4 100%);
 }
+*/
+
 #nav .subnav {
   display: none;
   position: absolute;
@@ -391,8 +410,15 @@ h2 a, h2 a:hover {
   background: #fff;
   border: 1px solid #666;
 }
-#sitepage #gallery {
+#sitepage .gallery {
   position: relative;
+}
+#sitepage .gallery.hidden {
+  display: none;
+}
+#sitepage .gallery h3 {
+  font-size: 16px;
+  margin: 10px 0;
 }
 .pix1, .pix2, .pix3 {
   float: left;
@@ -404,6 +430,9 @@ h2 a, h2 a:hover {
 img.thumb {
   width: 100%;
   margin-bottom: 15px;
+}
+.highslide-caption {
+  text-align: center;
 }
 
 /* Map Elements */
