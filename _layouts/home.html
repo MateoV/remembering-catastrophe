@@ -72,12 +72,12 @@ markerLayer.add_feature({
 {% for points in site.posts %}
 {% if points.coords %}
 $('.simplestyle-marker[alt="{{points.place}}"]')
-    .attr('alt','{{points.category}}/{{points.title | downcase | replace:" ","-" }}');
+    .attr('data-link','{{points.category}}/{{points.title | downcase | replace:" ","-" }}');
 {% endif %}
 {% endfor %}
 
 $('.simplestyle-marker').click(function() {
-    window.location = $(this).attr('alt');
+    window.location = $(this).attr('data-link');
 });
 
 document.getElementById('Austria').onclick = function() {
