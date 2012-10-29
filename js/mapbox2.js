@@ -8337,7 +8337,16 @@ mapbox.markers.interaction = function(mmg) {
             }, 200);
         };
 
-        var show = function(e) {
+        var show = function(e, fromTop) {
+            if (!e) { e = window.event; }
+            if (e.pageY) {
+                var posy = e.pageY;
+            }
+            else if (e.clientY) {
+                var posy = e.clientY + document.body.scrollTop
+                        + document.documentElement.scrollTop;
+            }
+            var flipper = fromTop || posy;
             var content = formatter(marker.data);
             // Don't show a popup if the formatter returns an
             // empty string. This does not do any magic around DOM elements.
@@ -8351,7 +8360,11 @@ mapbox.markers.interaction = function(mmg) {
             }
 
             var tooltip = document.createElement('div');
-            tooltip.className = 'marker-tooltip';
+            if (flipper < 240) {
+                tooltip.className = 'marker-tooltip flip';
+            } else {
+                tooltip.className = 'marker-tooltip';
+            }
             tooltip.style.width = '100%';
 
             var wrapper = tooltip.appendChild(document.createElement('div'));

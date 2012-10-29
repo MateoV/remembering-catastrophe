@@ -127,7 +127,7 @@ table {
 input,
 select,
 textarea,
-body { font: 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif; }
+body { font: 13px/20px "Open Sans",Helvetica,Arial,sans-serif; }
 
 /*
 ** Markup free clearing
@@ -150,7 +150,6 @@ body { font: 13px/20px "Helvetica Neue",Helvetica,Arial,sans-serif; }
 
 
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #1E1E1E;
 }
 
@@ -375,7 +374,7 @@ h2 a, h2 a:hover {
   border-bottom: 1px solid #111919;
   width: 125px;
   margin-bottom: 0;
-  line-height: 14px;
+  line-height: 18px;
 }
 
 /* Holocaust Site Pages */
@@ -413,6 +412,9 @@ h2 a, h2 a:hover {
 #sitepage .gallery {
   position: relative;
 }
+#sitepage .gallery a {
+  position: relative;
+}
 #sitepage .gallery.hidden {
   display: none;
 }
@@ -430,6 +432,29 @@ h2 a, h2 a:hover {
 img.thumb {
   width: 100%;
   margin-bottom: 15px;
+}
+.caption2 {
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 12px;
+  color: #ccc;
+  margin-top: -20px;
+}
+.caption3, .caption4 {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  background: rgba(255,255,255,0.8);
+  background: rgb(255,255,255);
+  text-align: center;
+  font-size: 12px;
+  color: #333;
+  bottom: 20px;
+  left: 0;
+  z-index: 100;
+}
+.caption3 {
+  display: none;
 }
 .highslide-caption {
   text-align: center;
@@ -452,5 +477,29 @@ img.thumb {
   font-size: 11px;
   color: #aaa;
   text-transform: uppercase;
-  margin-top: 5px;
+}
+.marker-tooltip.flip {
+  margin-top: 130px;
+}
+.flip .marker-popup:after, .flip .marker-popup:before {
+  top:-30px;
+}
+.flip .marker-popup:after {
+  border-bottom-color: #fff;
+  border-top-color: transparent;
+}
+.flip .marker-popup:before {
+  border-bottom-color: #ccc;
+  border-top-color: transparent;
+}
+.map-attribution {
+  right: 20px;
+  left: auto;
+  background: none;
+}
+.map-attribution a {
+  color: #333;
+}
+.map-attribution a:hover {
+  text-decoration: underline;
 }

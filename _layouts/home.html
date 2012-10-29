@@ -39,55 +39,14 @@ class: home
     </div>
 
 <script type="text/javascript">
+$(function() {
 var orig;
-$('#nav ul li a, ul.subnav li a').hover(
-    function () {
-        var that = $(this).parent().parent();
-        $('#nav ul li a').removeClass('active');
-        
-        if (that.hasClass('subnav')) {
-            that.css('display','block');
-            that.prev().addClass('active');
-            orig = $('.simplestyle-marker[alt="' + this.id + '"]').attr('src');
-            $('.simplestyle-marker[alt="' + this.id + '"]')
-                .attr('src','http://a.tiles.mapbox.com/v3/marker/pin-m-star-stroked+ff0000.png');
-            $('.simplestyle-marker[alt="' + this.id + '"]').trigger('mouseover');
-        } else {
-            var fromTop = -18 - $(this).next().height()/2;
-            $(this).children('.icon-zoom-in').css('display','block');
-            //if ($(this).next().hasClass('on')) {
-                $(this).next().css('display','block').css('margin-top',fromTop);
-            //} else {
-            //    $('ul.subnav').removeClass('on');
-            //    $(this).next().fadeIn('fast').css('margin-top',fromTop).addClass('on');
-            //}
-            
-            if ($(this).next().offset().top < $('#nav').offset().top) {
-                $(this).next().css('margin-top',-18 - $(this).height()*2);
-            }
-            if (($(this).next().offset().top + $(this).next().height()) > $(window).height() + 20) {
-                $(this).next().css('margin-top',(fromTop - ($(this).next().offset().top + $(this).next().height() - $(window).height() + 20)));
-            }
-        }
-    },
-    function () {
-        //if ($(this).parent().parent().hasClass('subnav')) {
-        //    $('ul.subnav').fadeOut('fast');
-        //} else {
-            $('ul.subnav').css('display','none');
-        //}
-        $('.icon-zoom-in').css('display','none');
-        $('#nav ul li a').removeClass('active');
-        $('.simplestyle-marker[alt="' + this.id + '"]')
-            .attr('src',orig);
-        $('.simplestyle-marker[alt="' + this.id + '"]').trigger('mouseout');
-    }
-);
 
 var m = mapbox.map('map');
 m.addLayer(mapbox.layer().id('matt.map-7pq00fdn'));
 m.zoom(5).center({ lat: 53.5, lon: 10 }).setZoomRange(4,10);
 m.ui.zoomer.add();
+m.ui.attribution.add();
 
 var markerLayer = mapbox.markers.layer();
 
@@ -113,12 +72,12 @@ markerLayer.add_feature({
 {% for points in site.posts %}
 {% if points.coords %}
 $('.simplestyle-marker[alt="{{points.place}}"]')
-    .attr('href','{{points.category}}/{{points.title | downcase | replace:" ","-" }}');
+    .attr('alt','{{points.category}}/{{points.title | downcase | replace:" ","-" }}');
 {% endif %}
 {% endfor %}
 
 $('.simplestyle-marker').click(function() {
-    window.location = $(this).attr('href');
+    window.location = $(this).attr('alt');
 });
 
 document.getElementById('Austria').onclick = function() {
@@ -154,5 +113,53 @@ document.getElementById('Belarus').onclick = function() {
     document.getElementById('United Kingdom').onclick = function() {
         m.centerzoom({ lat: 51.5, lon: 0 }, 7, true);
     };
+    
+$('.map-attribution').html('<a href="http://mapbox.com/about/maps/">powered by MapBox</a>');
+
+$('#nav ul li a, ul.subnav li a').hover( //turn into just #nav hover?
+    function () {
+        var that = $(this).parent().parent();
+        $('#nav ul li a').removeClass('active');
+        
+        if (that.hasClass('subnav')) {
+            that.css('display','block');
+            that.prev().addClass('active');
+            orig = $('.simplestyle-marker[alt="' + this.id + '"]').attr('src');
+            $('.simplestyle-marker[alt="' + this.id + '"]')
+                .attr('src','http://a.tiles.mapbox.com/v3/marker/pin-m-star-stroked+ff0000.png');
+            var fromTop = $('.simplestyle-marker[alt="' + this.id + '"]').offset().top;
+            $('.simplestyle-marker[alt="' + this.id + '"]').trigger('mouseover', fromTop);
+        } else {
+            var fromTop = -18 - $(this).next().height()/2;
+            $(this).children('.icon-zoom-in').css('display','block');
+            //if ($(this).next().hasClass('on')) {
+                $(this).next().css('display','block').css('margin-top',fromTop);
+            //} else {
+            //    $('ul.subnav').removeClass('on');
+            //    $(this).next().fadeIn('fast').css('margin-top',fromTop).addClass('on');
+            //}
+            
+            if ($(this).next().offset().top < $('#nav').offset().top) {
+                $(this).next().css('margin-top',-18 - $(this).height()*2);
+            }
+            if (($(this).next().offset().top + $(this).next().height()) > $(window).height() + 20) {
+                $(this).next().css('margin-top',(fromTop - ($(this).next().offset().top + $(this).next().height() - $(window).height() + 20)));
+            }
+        }
+    },
+    function () {
+        //if ($(this).parent().parent().hasClass('subnav')) {
+        //    $('ul.subnav').fadeOut('fast');
+        //} else {
+            $('ul.subnav').css('display','none');
+        //}
+        $('.icon-zoom-in').css('display','none');
+        $('#nav ul li a').removeClass('active');
+        $('.simplestyle-marker[alt="' + this.id + '"]')
+            .attr('src',orig);
+        $('.simplestyle-marker[alt="' + this.id + '"]').trigger('mouseout');
+    }
+);
+});
 
 </script>

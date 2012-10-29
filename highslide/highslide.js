@@ -1399,7 +1399,7 @@ writeCredits : function () {
 	this.credits = hs.createElement('a', {
 		href: hs.creditsHref,
 		target: hs.creditsTarget,
-		className: 'highslide-credits',
+		className: 'highslide-credits'
 		//innerHTML: hs.lang.creditsText,
 		//title: hs.lang.creditsTitle
 	});
