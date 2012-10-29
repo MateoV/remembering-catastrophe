@@ -63,7 +63,7 @@ var photoArray1 = [],
 
 function placephoto(set, pic, id) {
   var g = '#gallery' + set,
-      caption = pic.replace('.jpg','').replace("'","\\\'"),
+      caption = pic.replace('.jpg','').replace("'","\\\'").replace('2000/',''),
       a = '<a href="{{base}}/img/{{page.category}}/{{page.title}}/',
       b = '" class="highslide" onmouseover="showCaption(this)" onmouseout="hideCaption(this)" onclick="return hs.expand(this, { captionText: \'' + caption + '\' })"><img id="img',
       c = '" class="thumb" src="{{base}}/img/{{page.category}}/{{page.title}}/',
