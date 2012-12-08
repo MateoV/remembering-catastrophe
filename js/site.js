@@ -1,38 +1,28 @@
-//mapbox.auto('map','matt.map-7pq00fdn', function(map) {
-//    map.setZoomRange(4,8);
-/*
-    document.getElementById('austria').onclick = function() {
-        map.centerzoom({ lat: 47.58, lon: 14.2 }, 7, true);
-    };
-    document.getElementById('belarus').onclick = function() {
-        map.centerzoom({ lat: 53.7, lon: 27.9 }, 6, true);
-    };
-    document.getElementById('cz').onclick = function() {
-        map.centerzoom({ lat: 49.8, lon: 15.5 }, 7, true);
-    };
-    document.getElementById('france').onclick = function() {
-        map.centerzoom({ lat: 46.6, lon: 2.5 }, 6, true);
-    };
-    document.getElementById('germany').onclick = function() {
-        map.centerzoom({ lat: 51.1, lon: 10.5 }, 6, true);
-    };
-    document.getElementById('latvia').onclick = function() {
-        map.centerzoom({ lat: 57, lon: 24.6 }, 7, true);
-    };
-    document.getElementById('lithuania').onclick = function() {
-        map.centerzoom({ lat: 55.4, lon: 24 }, 7, true);
-    };
-    document.getElementById('netherlands').onclick = function() {
-        map.centerzoom({ lat: 52.3, lon: 5.5 }, 7, true);
-    };
-    document.getElementById('poland').onclick = function() {
-        map.centerzoom({ lat: 52.3, lon: 19.6 }, 6, true);
-    };
-    document.getElementById('ukraine').onclick = function() {
-        map.centerzoom({ lat: 49.2, lon: 31.5 }, 6, true);
-    };
-    document.getElementById('uk').onclick = function() {
-        map.centerzoom({ lat: 51.5, lon: 0 }, 7, true);
-    };
-    */
-//});
+var TJ = {
+    attribution: "<a href='http://mapbox.com/about/maps' target='_blank'>Terms & Feedback</a>",
+    bounds: [
+        -180,
+        -85,
+        180,
+        85
+    ],
+    center: [
+        0,
+        0,
+        2
+    ],
+    id: "matt.map-7pq00fdn",
+    maxzoom: 17,
+    minzoom: 2,
+    name: "Remembering Catastrophe base map",
+    private: false,
+    scheme: "xyz",
+    tilejson: "2.0.0",
+    tiles: [
+        "http://a.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png",
+        "http://b.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png",
+        "http://c.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png",
+        "http://d.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png"
+    ],
+    webpage: "http://tiles.mapbox.com/matt/map/map-7pq00fdn"
+};

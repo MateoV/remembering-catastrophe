@@ -102,10 +102,11 @@ function loadphoto() {
 
 loadphoto();
 
-var coords = {{page.coords}};
-var sm = mapbox.map('smallmap');
-sm.addLayer(mapbox.layer().id('matt.map-7pq00fdn'));
+var coords = {{page.coords}},
+    sm = mapbox.map('smallmap', null, null, null),
+    mbLayer = mapbox.layer().tilejson(TJ);
 sm.zoom(4).center({ lat: coords[1], lon: coords[0] }).setZoomRange(3,17);
+sm.addLayer(mbLayer);
 sm.ui.zoomer.add();
 sm.ui.attribution.add();
 

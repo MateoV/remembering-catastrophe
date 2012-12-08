@@ -38,11 +38,11 @@ class: home
 
 <script type="text/javascript">
 $(function() {
-var orig;
-
-var m = mapbox.map('map');
-m.addLayer(mapbox.layer().id('matt.map-7pq00fdn'));
+var orig,
+    m = mapbox.map('map', null, null, null),
+    mbLayer = mapbox.layer().tilejson(TJ);
 m.zoom(5).center({ lat: 53.5, lon: 10 }).setZoomRange(4,10);
+m.addLayer(mbLayer);
 m.ui.zoomer.add();
 m.ui.attribution.add();
 
