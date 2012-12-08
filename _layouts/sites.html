@@ -67,19 +67,7 @@ function placephoto(set, pic, id) {
       a = '<a href="{{base}}/img/{{page.category}}/{{page.title}}/',
       b = '" class="highslide" onmouseover="showCaption(this)" onmouseout="hideCaption(this)" onclick="return hs.expand(this, { captionText: \'' + caption + '\' })"><img id="img',
       c = '" class="thumb" src="{{base}}/img/{{page.category}}/{{page.title}}/',
-      abc = a + pic + b + id + c + pic + '" />';
-  var place = '{{page.place}}';
-  if (place == 'Gusen') {
-      abc += '</a><div class="caption2">' + caption + '</div>';
-  }
-  if (place == 'Mauthausen') {
-      abc += '<div class="caption3">' + caption + '</div></a>';
-  }
-  if (place == 'Schloss Hartheim') {
-      abc += '<div class="caption4">' + caption + '</div></a>';
-  } else {
-      abc += '</a>';
-  }
+      abc = a + pic + b + id + c + pic + '" /><div class="caption3">' + caption + '</div></a>';
       
   if ($(g + ' .pix1').height() <= $(g + ' .pix2').height() && $(g + ' .pix1').height() <= $(g + ' .pix3').height()) {
     $(g + ' .pix1').append(abc);
@@ -118,6 +106,10 @@ var coords = {{page.coords}};
 var sm = mapbox.map('smallmap');
 sm.addLayer(mapbox.layer().id('matt.map-7pq00fdn'));
 sm.zoom(4).center({ lat: coords[1], lon: coords[0] }).setZoomRange(3,17);
+sm.ui.zoomer.add();
+sm.ui.attribution.add();
+
+$('.map-attribution').html('<a href="http://mapbox.com/about/maps/">powered by MapBox</a>');
 
 var siteMarker = mapbox.markers.layer();
 
@@ -125,7 +117,7 @@ sm.addLayer(siteMarker);
 
 siteMarker.add_feature({
     geometry: {
-        coordinates: {{page.coords}}
+        coordinates: coords
     },
     properties: {
         'marker-color': '#ff0000',
