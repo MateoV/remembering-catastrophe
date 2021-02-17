@@ -19,10 +19,10 @@ var TJ = {
     scheme: "xyz",
     tilejson: "2.0.0",
     tiles: [
-        "http://a.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png",
-        "http://b.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png",
-        "http://c.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png",
-        "http://d.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png"
+        "https://a.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png",
+        "https://b.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png",
+        "https://c.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png",
+        "https://d.tiles.mapbox.com/v3/matt.map-7pq00fdn/{z}/{x}/{y}.png"
     ],
-    webpage: "http://tiles.mapbox.com/matt/map/map-7pq00fdn"
+    webpage: "https://tiles.mapbox.com/matt/map/map-7pq00fdn"
 };
