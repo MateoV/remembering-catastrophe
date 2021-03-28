@@ -51,13 +51,13 @@ var photoArray1 = [],
   {% if p.set %}
     $('#gallery2').removeClass('hidden');
     {% for item in p.pics %}
-      photoArray{{p.set}}.push('{{item}}');
+      photoArray{{p.set}}.push("{{item}}");
     {% endfor %}
     {% if p.header %}
       $('#gallery{{p.set}}').prepend('<h3>{{p.header}}</h3>');
     {% endif %}
   {% else %}
-    photoArray1.push('{{p}}');
+    photoArray1.push("{{p}}");
   {% endif %}
 {% endfor %}
 
@@ -102,22 +102,26 @@ function loadphoto() {
 
 loadphoto();
 
+L.mapbox.accessToken = 'pk.eyJ1IjoibWF0dCIsImEiOiJTUHZkajU0In0.oB-OGTMFtpkga8vC48HjIg';
+
 var coords = {{page.coords}},
-    sm = mapbox.map('smallmap', null, null, null),
-    mbLayer = mapbox.layer().tilejson(TJ);
-sm.zoom(4).center({ lat: coords[1], lon: coords[0] }).setZoomRange(3,17);
+    sm = L.map('smallmap',{
+        center: [coords[1], coords[0]],
+        zoom: 4,
+        minZoom: 4,
+        maxZoom: 4,
+        zoomControl: false,
+        dragging: false,
+        attributionControl: false,
+    }),
+    mbLayer = L.mapbox.styleLayer('mapbox://styles/matt/ckmrzzyxw2l5i17nkhljfq6ea');
+
 sm.addLayer(mbLayer);
-sm.ui.zoomer.add();
-sm.ui.attribution.add();
 
-$('.map-attribution').html('<a href="http://mapbox.com/about/maps/">powered by MapBox</a>');
-
-var siteMarker = mapbox.markers.layer();
-
-sm.addLayer(siteMarker);
-
-siteMarker.add_feature({
+var siteMarker = L.mapbox.featureLayer({
+    type: 'Feature',
     geometry: {
+        type: 'Point',
         coordinates: coords
     },
     properties: {
@@ -125,6 +129,8 @@ siteMarker.add_feature({
         'marker-symbol': 'star-stroked'
     }
 });
+
+sm.addLayer(siteMarker);
 
 function showCaption(pic) {
     $(pic).children('.caption3').show();

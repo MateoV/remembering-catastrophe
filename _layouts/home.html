@@ -38,81 +38,100 @@ class: home
 
 <script type="text/javascript">
 $(function() {
+    L.mapbox.accessToken = 'pk.eyJ1IjoibWF0dCIsImEiOiJTUHZkajU0In0.oB-OGTMFtpkga8vC48HjIg';
 var orig,
-    m = mapbox.map('map', null, null, null),
-    mbLayer = mapbox.layer().tilejson(TJ);
-m.zoom(5).center({ lat: 53.5, lon: 10 }).setZoomRange(4,10);
+    m = L.map('map',{
+        center: [53.5, 10],
+        zoom: 5,
+        attributionControl: false
+    }),
+    mbLayer = L.mapbox.styleLayer('mapbox://styles/matt/ckmrzzyxw2l5i17nkhljfq6ea');
 m.addLayer(mbLayer);
-m.ui.zoomer.add();
-m.ui.attribution.add();
 
-var markerLayer = mapbox.markers.layer();
-
-mapbox.markers.interaction(markerLayer);
-m.addLayer(markerLayer);
-
-{% for points in site.posts %}
-{% if points.coords %}
-markerLayer.add_feature({
-    geometry: {
-        coordinates: {{points.coords}}
-    },
-    properties: {
-        'marker-color': '#9a2e2e',
-        'marker-symbol': 'star-stroked',
-        title: '{{points.place}}',
-        description: '{{points.category}}'
-    }
+var markerLayer = L.mapbox.featureLayer({
+    type: "FeatureCollection",
+    features: [
+        {
+            type: "Feature",
+            geometry: {
+                type: "Point",
+                coordinates: [null,null]
+            },
+            properties: {}
+        }
+        {% for points in site.posts %}
+        {% if points.coords %}
+        ,{
+            type: "Feature",
+            geometry: {
+                type: "Point",
+                coordinates: {{points.coords}}
+            },
+            properties: {
+                'marker-color': '#9a2e2e',
+                'marker-symbol': 'star-stroked',
+                title: '{{points.place}}',
+                description: '{{points.category}}'
+            }
+        }
+        {% endif %}
+        {% endfor %}
+    ]
 });
-{% endif %}
-{% endfor %}
+
+markerLayer.addTo(m);
+
+markerLayer.on('mouseover', function(e) {
+    e.layer.openPopup();
+});
+markerLayer.on('mouseout', function(e) {
+    e.layer.closePopup();
+});
 
 {% for points in site.posts %}
 {% if points.coords %}
-$('.simplestyle-marker[alt="{{points.place}}"]')
+$('.leaflet-marker-icon[title="{{points.place}}"]')
     .attr('data-link','{{points.category}}/{{points.title | downcase | replace:" ","-" }}');
 {% endif %}
 {% endfor %}
 
-$('.simplestyle-marker').click(function() {
+$('.leaflet-marker-icon').click(function() {
     window.location = $(this).attr('data-link');
 });
 
 document.getElementById('Austria').onclick = function() {
-        m.centerzoom({ lat: 47.58, lon: 14.2 }, 7, true);
+        m.setView({ lat: 47.58, lon: 14.2 }, 7);
     };
 document.getElementById('Belarus').onclick = function() {
-        m.centerzoom({ lat: 53.7, lon: 27.9 }, 6, true);
+        m.setView({ lat: 53.7, lon: 27.9 }, 6);
     };
     document.getElementById('Czech Republic').onclick = function() {
-        m.centerzoom({ lat: 49.8, lon: 15.5 }, 7, true);
+        m.setView({ lat: 49.8, lon: 15.5 }, 7);
     };
     document.getElementById('France').onclick = function() {
-        m.centerzoom({ lat: 46.6, lon: 2.5 }, 6, true);
+        m.setView({ lat: 46.6, lon: 2.5 }, 6);
     };
     document.getElementById('Germany').onclick = function() {
-        m.centerzoom({ lat: 51.1, lon: 10.5 }, 6, true);
+        m.setView({ lat: 51.1, lon: 10.5 }, 6);
     };
     document.getElementById('Latvia').onclick = function() {
-        m.centerzoom({ lat: 57, lon: 24.6 }, 8, true);
+        m.setView({ lat: 57, lon: 24.6 }, 8);
     };
     document.getElementById('Lithuania').onclick = function() {
-        m.centerzoom({ lat: 55.4, lon: 24 }, 7, true);
+        m.setView({ lat: 55.4, lon: 24 }, 7);
     };
     document.getElementById('The Netherlands').onclick = function() {
-        m.centerzoom({ lat: 52.3, lon: 5.5 }, 7, true);
+        m.setView({ lat: 52.3, lon: 5.5 }, 7);
     };
     document.getElementById('Poland').onclick = function() {
-        m.centerzoom({ lat: 52.3, lon: 19.6 }, 6, true);
+        m.setView({ lat: 52.3, lon: 19.6 }, 6);
     };
     document.getElementById('Ukraine').onclick = function() {
-        m.centerzoom({ lat: 49.2, lon: 31.5 }, 6, true);
+        m.setView({ lat: 49.2, lon: 31.5 }, 6);
     };
     document.getElementById('United Kingdom').onclick = function() {
-        m.centerzoom({ lat: 51.5, lon: 0 }, 7, true);
+        m.setView({ lat: 51.5, lon: 0 }, 7);
     };
-    
-$('.map-attribution').html('<a href="http://mapbox.com/about/maps/">powered by MapBox</a>');
 
 $('#nav ul li a, ul.subnav li a').hover( //turn into just #nav hover?
     function () {
@@ -122,11 +141,11 @@ $('#nav ul li a, ul.subnav li a').hover( //turn into just #nav hover?
         if (that.hasClass('subnav')) {
             that.css('display','block');
             that.prev().addClass('active');
-            orig = $('.simplestyle-marker[alt="' + this.id + '"]').attr('src');
-            $('.simplestyle-marker[alt="' + this.id + '"]')
-                .attr('src','http://a.tiles.mapbox.com/v3/marker/pin-m-star-stroked+ff0000.png');
-            var fromTop = $('.simplestyle-marker[alt="' + this.id + '"]').offset().top;
-            $('.simplestyle-marker[alt="' + this.id + '"]').trigger('mouseover', fromTop);
+            orig = $('.leaflet-marker-icon[title="' + this.id + '"]').attr('src');
+            $('.leaflet-marker-icon[title="' + this.id + '"]')
+                .attr('src','https://api.mapbox.com/v4/marker/pin-m-star-stroked+ff0000@2x.png?access_token=pk.eyJ1IjoibWF0dCIsImEiOiJTUHZkajU0In0.oB-OGTMFtpkga8vC48HjIg');
+            var fromTop = $('.leaflet-marker-icon[title="' + this.id + '"]').offset().top;
+            $('.leaflet-marker-icon[title="' + this.id + '"]').trigger('mouseover', fromTop);
         } else {
             var fromTop = -18 - $(this).next().height()/2;
             $(this).children('.icon-zoom-in').css('display','block');
@@ -153,9 +172,9 @@ $('#nav ul li a, ul.subnav li a').hover( //turn into just #nav hover?
         //}
         $('.icon-zoom-in').css('display','none');
         $('#nav ul li a').removeClass('active');
-        $('.simplestyle-marker[alt="' + this.id + '"]')
+        $('.leaflet-marker-icon[title="' + this.id + '"]')
             .attr('src',orig);
-        $('.simplestyle-marker[alt="' + this.id + '"]').trigger('mouseout');
+        $('.leaflet-marker-icon[title="' + this.id + '"]').trigger('mouseout');
     }
 );
 });
