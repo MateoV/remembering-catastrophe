@@ -1,7 +1,7 @@
 auto: true
 server: true
 baseurl: /remembering-catastrophe
-permalink: /:categories/:title
+permalink: /:categories/:title/
 exclude: [newpics, data]
 prose:
   rooturl: "_posts"
