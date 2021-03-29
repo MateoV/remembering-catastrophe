@@ -32,7 +32,7 @@ layout: default
           <ul>
             {% for x in site.posts reversed %}
             {% if x.category == country %}
-            <li><a href='{{base}}/{{country}}/{{x.title | downcase | replace:" ","-" }}' id='{{x.place}}'>{{x.place}}</a></li>
+            <li><a href='{{base}}/{{country}}/{{x.title | downcase | replace:" ","-" }}/' id='{{x.place}}'>{{x.place}}</a></li>
             {% endif %}
             {% endfor %}
           </ul>

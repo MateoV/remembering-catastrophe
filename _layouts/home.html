@@ -14,7 +14,7 @@ class: home
       <ul class='subnav'>
         {% for x in site.posts reversed %}
         {% if x.category == country %}
-        <li><a class='gradient' href='{{country}}/{{x.title | downcase | replace:" ","-" }}' id='{{x.place}}'>{{x.place}}</a></li>
+        <li><a class='gradient' href='{{country}}/{{x.title | downcase | replace:" ","-" }}/' id='{{x.place}}'>{{x.place}}</a></li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -51,14 +51,7 @@ m.addLayer(mbLayer);
 var markerLayer = L.mapbox.featureLayer({
     type: "FeatureCollection",
     features: [
-        {
-            type: "Feature",
-            geometry: {
-                type: "Point",
-                coordinates: [null,null]
-            },
-            properties: {}
-        }
+        {}
         {% for points in site.posts %}
         {% if points.coords %}
         ,{
@@ -91,7 +84,7 @@ markerLayer.on('mouseout', function(e) {
 {% for points in site.posts %}
 {% if points.coords %}
 $('.leaflet-marker-icon[title="{{points.place}}"]')
-    .attr('data-link','{{points.category}}/{{points.title | downcase | replace:" ","-" }}');
+    .attr('data-link','{{points.category}}/{{points.title | downcase | replace:" ","-" }}/');
 {% endif %}
 {% endfor %}
 
